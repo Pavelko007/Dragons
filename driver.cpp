@@ -24,7 +24,7 @@ int main( )
 
     run( dragons, currDragonNumbers );
 
-    cout << " insert your closing message here" << endl;
+    cout << "That's all folks" << endl;
 }
 
 /*
