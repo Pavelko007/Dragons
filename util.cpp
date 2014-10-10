@@ -289,5 +289,5 @@ int initialThreadYPos( )
 void initialize( )
 {
    // seed the random generator just once
-   srand( time( NULL ) );
+	srand((unsigned int)time(NULL));
 }

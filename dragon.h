@@ -32,5 +32,11 @@ public:
 private:
 
    /* *** to do  *** */
+	string name;
+	string color;
+	string rider;
+	unsigned int wingspan;
+	int posX;
+	int posY;
 };
 #endif
