@@ -48,7 +48,6 @@ int main( )
 int loadFile( Dragon * dragons )
 {
 	int index = 0;
-
 	
 	//TODO
 	cout << "Enter filename >> ";
@@ -151,7 +150,13 @@ void process( Dragon * dragons, int & currentDragonNumbers, int choice,
  */
 void addDragon( Dragon * dragons, int & currentDragonNumbers )
 {
-   
+	if (currentDragonNumbers == NUMBER_OF_DRAGONS)
+	{
+		cout << "You can't add more dragons" << endl;
+		return;
+	}
+	cin >> dragons[currentDragonNumbers];
+	currentDragonNumbers++;
 	//TODO
 }
 
