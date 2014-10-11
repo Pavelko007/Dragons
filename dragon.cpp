@@ -21,3 +21,9 @@ Dragon::Dragon()
 	wingspan = -1;
 	posX = posY = -1;
 }
+
+ifstream& operator>> (ifstream& is, Dragon& dragon)
+{
+	is >> dragon.name >> dragon.rider >> dragon.colour >> dragon.wingspan;
+	return is;
+}

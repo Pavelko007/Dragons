@@ -30,6 +30,7 @@ public:
 
    /* *** to do  *** */
 	Dragon();
+	friend ifstream& operator>> (ifstream& is, Dragon& dragon);
 private:
 
    /* *** to do  *** */
