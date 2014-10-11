@@ -28,12 +28,13 @@ class Dragon
 {
 public:
 
-   /* *** to do  *** */
+	//TODO
 	Dragon();
 	friend ifstream& operator>> (ifstream& is, Dragon& dragon);
+	friend ostream& operator<< (ostream& os, const Dragon dragon);
 private:
 
-   /* *** to do  *** */
+	//TODO
 	string name;
 	string colour;
 	string rider;

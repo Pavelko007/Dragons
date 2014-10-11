@@ -60,7 +60,7 @@ int dragonNewXPos( const Dragon& d, bool direction )
 {
     int newX = 0;
 
-    /* *** to do *** */
+	//TODO
 
 
     return newX;
@@ -122,7 +122,7 @@ int dragonNewYPos( const Dragon & d, bool direction )
 {
     int newY = 0;
 
-    /* *** to do *** */
+	//TODO
 
     return newY;
 }
@@ -212,7 +212,7 @@ bool flameThread( const Dragon & d, const PernThread * pt )
 {
     bool result = false;
 
-    /* *** to do *** */
+	//TODO
 
     return result;
 }
