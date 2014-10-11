@@ -30,10 +30,10 @@ public:
 
 	//TODO
 	Dragon();	
-	ifstream& operator>> (ifstream& ifs);
+	ifstream& operator>>(ifstream& ifs);
+	istream & operator>>(std::istream &is);
 
-
-	friend ostream& operator<< (ostream& os, const Dragon dragon);
+	friend ostream& operator<<(ostream& os, const Dragon dragon);
 private:
 
 	//TODO
@@ -47,5 +47,6 @@ private:
 };
 
 ifstream& operator>> (ifstream& ifs, Dragon& dragon);
+istream& operator>> (istream& is, Dragon& dragon);
 
 #endif

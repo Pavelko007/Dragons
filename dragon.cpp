@@ -35,6 +35,27 @@ ifstream& Dragon::operator>> (ifstream& ifs)
 	return ifs;
 }
 
+istream& operator>> (istream& is, Dragon& dragon)
+{
+	return dragon >> is;
+}
+
+istream & Dragon::operator>>(std::istream &is)
+{
+	cout << "Enter Dragon name >> ";
+	is >> name;
+	cout << "Enter Dragon rider name >> ";
+	is >> rider;
+	cout << "Enter Dragon colour >> ";
+	is >> colour;
+	cout << "Enter wingspan >> ";
+	is >> wingspan;
+
+	setInitialPos();
+
+	return is;
+}
+
 void Dragon::setInitialPos()
 {
 	posX = initialDragonXPos();
@@ -43,6 +64,7 @@ void Dragon::setInitialPos()
 
 ostream& operator << (ostream& os, const Dragon dragon)
 {
+	//TODO
 	os << "Dragon" << endl
 		<< "name: " << dragon.name
 		<< " rider: " << dragon.rider
