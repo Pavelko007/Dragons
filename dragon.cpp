@@ -12,3 +12,12 @@
 #include "util.h"
 
 /* *** to do *** */
+
+Dragon::Dragon()
+{
+	name = "Not set";
+	rider = "Not set";
+	colour = "unknown";
+	wingspan = -1;
+	posX = posY = -1;
+}

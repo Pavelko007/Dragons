@@ -29,13 +29,14 @@ class Dragon
 public:
 
    /* *** to do  *** */
+	Dragon();
 private:
 
    /* *** to do  *** */
 	string name;
-	string color;
+	string colour;
 	string rider;
-	unsigned int wingspan;
+	int wingspan;
 	int posX;
 	int posY;
 };
