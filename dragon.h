@@ -30,9 +30,10 @@ public:
 
 	//TODO
 	Dragon();	
+	string getDragonName() const;
+
 	ifstream& operator>>(ifstream& ifs);
 	istream & operator>>(std::istream &is);
-
 	friend ostream& operator<<(ostream& os, const Dragon dragon);
 private:
 

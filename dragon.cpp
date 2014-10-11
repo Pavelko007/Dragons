@@ -42,6 +42,7 @@ istream& operator>> (istream& is, Dragon& dragon)
 
 istream & Dragon::operator>>(std::istream &is)
 {
+	//TODO
 	cout << "Enter Dragon name >> ";
 	is >> name;
 	cout << "Enter Dragon rider name >> ";
@@ -60,6 +61,11 @@ void Dragon::setInitialPos()
 {
 	posX = initialDragonXPos();
 	posY = initialDragonYPos();
+}
+
+string Dragon::getDragonName() const
+{
+	return name;
 }
 
 ostream& operator << (ostream& os, const Dragon dragon)
