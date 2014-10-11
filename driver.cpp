@@ -16,15 +16,15 @@
  */
 int main( )
 {
-    initialize( );
+	initialize( );
 
-    Dragon dragons[ NUMBER_OF_DRAGONS ];
+	Dragon dragons[ NUMBER_OF_DRAGONS ];
 
-    int currDragonNumbers = loadFile( dragons );
+	int currDragonNumbers = loadFile( dragons );
 
-    run( dragons, currDragonNumbers );
+	run( dragons, currDragonNumbers );
 
-    cout << "That's all folks" << endl;
+	cout << "That's all folks" << endl;
 }
 
 /*
@@ -47,9 +47,10 @@ int main( )
  */
 int loadFile( Dragon * dragons )
 {
-    int index = 0;
+	int index = 0;
 
-    /* *** to do *** */
+	
+	//TODO
 	cout << "Enter filename >> ";
 	string filename;
 	cin >> filename;
@@ -68,7 +69,7 @@ int loadFile( Dragon * dragons )
 	}
 
 	inputFile.close();
-    return index;
+	return index;
 }
 
 /*
@@ -77,16 +78,16 @@ int loadFile( Dragon * dragons )
  */
 void run( Dragon * dragons, int & currentDragonNumbers )
 {
-    int choice = -1;
-    PernThread * pernPtr = nullptr;
-    while( choice != QUIT )
-    {
-         displayMainMenu( );
-         cout << "Enter choice >> ";
-         cin >> choice;
-         cin.ignore( 10000, '\n' );
-         process( dragons, currentDragonNumbers, choice , pernPtr); 
-    }
+	int choice = -1;
+	PernThread * pernPtr = nullptr;
+	while( choice != QUIT )
+	{
+		 displayMainMenu( );
+		 cout << "Enter choice >> ";
+		 cin >> choice;
+		 cin.ignore( 10000, '\n' );
+		 process( dragons, currentDragonNumbers, choice , pernPtr); 
+	}
 }
 
 /*
@@ -95,12 +96,12 @@ void run( Dragon * dragons, int & currentDragonNumbers )
  */
 void displayMainMenu( )
 {
-    cout << "\nDragon Menu " << endl;
-    cout << ADD << ". Add Dragon" << endl;
-    cout << DETECT << ". Locate new thread" << endl;
-    cout << SELECT_ACTION << ". Select action" << endl;
-    cout << DISPLAY << ". Display current situation" << endl;
-    cout << QUIT << ". Quit" << endl;
+	cout << "\nDragon Menu " << endl;
+	cout << ADD << ". Add Dragon" << endl;
+	cout << DETECT << ". Locate new thread" << endl;
+	cout << SELECT_ACTION << ". Select action" << endl;
+	cout << DISPLAY << ". Display current situation" << endl;
+	cout << QUIT << ". Quit" << endl;
 }
 
 /*
@@ -111,33 +112,33 @@ void displayMainMenu( )
  *
  */
 void process( Dragon * dragons, int & currentDragonNumbers, int choice,
-              PernThread *& pernPtr )
+			  PernThread *& pernPtr )
 {
-    switch( choice )
-    {
-         case ADD :
-              addDragon( dragons, currentDragonNumbers );
-            break;
+	switch( choice )
+	{
+		 case ADD :
+			  addDragon( dragons, currentDragonNumbers );
+			break;
 
-         case DETECT :
-               makeThread( pernPtr );
-            break;
-         case SELECT_ACTION : 
-              action( dragons, currentDragonNumbers, pernPtr );
-            break;
+		 case DETECT :
+			   makeThread( pernPtr );
+			break;
+		 case SELECT_ACTION : 
+			  action( dragons, currentDragonNumbers, pernPtr );
+			break;
 
-         case DISPLAY :
-              showAll( dragons, currentDragonNumbers, pernPtr );
-            break;
+		 case DISPLAY :
+			  showAll( dragons, currentDragonNumbers, pernPtr );
+			break;
 
-         case QUIT : 
-              // just trap this choice so that it does not show as an error
-            break;
+		 case QUIT : 
+			  // just trap this choice so that it does not show as an error
+			break;
 
-         default:
-            cout << choice << " is not a valid option" << endl;
-            break;
-    }
+		 default:
+			cout << choice << " is not a valid option" << endl;
+			break;
+	}
 }
 
 /*
@@ -150,8 +151,8 @@ void process( Dragon * dragons, int & currentDragonNumbers, int choice,
  */
 void addDragon( Dragon * dragons, int & currentDragonNumbers )
 {
-   /* *** to do *** */
-
+   
+	//TODO
 }
 
 /*
@@ -165,12 +166,13 @@ void addDragon( Dragon * dragons, int & currentDragonNumbers )
  */
 int selectDragon( const Dragon * dragons, int currentDragonNumbers )
 {
-    
-    int index = -1;
+	
+	int index = -1;
 
-    /* *** to do *** */
+	
+	//TODO
 
-    return index; 
+	return index; 
 }
 
 /*
@@ -213,11 +215,11 @@ int selectDragon( const Dragon * dragons, int currentDragonNumbers )
  */
 void action( Dragon * dragons, int currentDragonNumbers, PernThread *& ptPtr )
 {
-     cout << "First select a Dragon" << endl;
-     int index = selectDragon( dragons, currentDragonNumbers );
+	 cout << "First select a Dragon" << endl;
+	 int index = selectDragon( dragons, currentDragonNumbers );
 
-     /* *** to do *** */
-
+	 
+	 //TODO
 }
 
 /*
@@ -230,11 +232,24 @@ void action( Dragon * dragons, int currentDragonNumbers, PernThread *& ptPtr )
  *
  */
 void showAll( const Dragon * dragons, int currentDragonNumbers, 
-              const PernThread * ptPtr )
-{
-    /* *** to do *** */
-
-
+			  const PernThread * ptPtr )
+{    
+	//TODO
+	cout << endl;
+	if (nullptr == ptPtr)
+	{
+		cout << "The sky is clear of Thread riders" << endl
+			<< "but stay alert!!";
+	}
+	else
+	{
+		cout << PernThread::getThread();
+	}
+	cout << endl;
+	for (int i = 0; i < currentDragonNumbers; i++)
+	{
+		cout << dragons[i];
+	}	 
 }
 
 /*
@@ -250,5 +265,5 @@ void showAll( const Dragon * dragons, int currentDragonNumbers,
  */
 void makeThread( PernThread *& ptPtr )
 {
-    ptPtr = PernThread::getThread( );
+	ptPtr = PernThread::getThread( );
 }
