@@ -170,12 +170,20 @@ void addDragon( Dragon * dragons, int & currentDragonNumbers )
  *
  */
 int selectDragon( const Dragon * dragons, int currentDragonNumbers )
-{
-	
+{	
 	int index = -1;
-
 	
 	//TODO
+	string dragonName;
+	cout << "Enter Dragon Name >> ";
+	cin >> dragonName;
+	for (int i = 0; i < currentDragonNumbers; i++)
+	{
+		if (dragons[i].getDragonName() == dragonName)
+		{
+			return i;
+		}
+	}
 
 	return index; 
 }
