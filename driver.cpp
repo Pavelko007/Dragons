@@ -50,7 +50,24 @@ int loadFile( Dragon * dragons )
     int index = 0;
 
     /* *** to do *** */
+	cout << "Enter filename >> ";
+	string filename;
+	cin >> filename;
+	ifstream inputFile(filename.c_str(), ifstream::binary);	 
 
+	if (inputFile.fail())
+	{
+		cout << "The file doesn't exist" << endl;
+		return 0;
+	}
+
+	while (index < NUMBER_OF_DRAGONS && inputFile.good())
+	{
+		inputFile >> dragons[index];
+		index++;
+	}
+
+	inputFile.close();
     return index;
 }
 
