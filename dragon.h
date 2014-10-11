@@ -29,8 +29,10 @@ class Dragon
 public:
 
 	//TODO
-	Dragon();
-	friend ifstream& operator>> (ifstream& is, Dragon& dragon);
+	Dragon();	
+	ifstream& operator>> (ifstream& ifs);
+
+
 	friend ostream& operator<< (ostream& os, const Dragon dragon);
 private:
 
@@ -41,5 +43,9 @@ private:
 	int wingspan;
 	int posX;
 	int posY;
+	void setInitialPos();
 };
+
+ifstream& operator>> (ifstream& ifs, Dragon& dragon);
+
 #endif

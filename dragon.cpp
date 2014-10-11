@@ -23,9 +23,22 @@ Dragon::Dragon()
 }
 
 ifstream& operator>> (ifstream& ifs, Dragon& dragon)
+{		
+	return dragon >> ifs;
+}
+
+ifstream& Dragon::operator>> (ifstream& ifs)
 {
-	ifs >> dragon.name >> dragon.rider >> dragon.colour >> dragon.wingspan;
+	ifs >> name >> rider >> colour >> wingspan;
+	setInitialPos();
+
 	return ifs;
+}
+
+void Dragon::setInitialPos()
+{
+	posX = initialDragonXPos();
+	posY = initialDragonYPos();
 }
 
 ostream& operator << (ostream& os, const Dragon dragon)
