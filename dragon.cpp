@@ -23,7 +23,7 @@ Dragon::Dragon()
 }
 
 ifstream& operator>> (ifstream& ifs, Dragon& dragon)
-{		
+{
 	return dragon >> ifs;
 }
 
@@ -42,15 +42,48 @@ istream& operator>> (istream& is, Dragon& dragon)
 
 istream & Dragon::operator>>(std::istream &is)
 {
-	//TODO
-	cout << "Enter Dragon name >> ";
-	is >> name;
+	//TODO	
+	while (true)
+	{
+		cout << "Enter Dragon Name >> ";
+		getline(cin, name);
+		if (string::npos != name.find(' '))
+		{
+			cout << "Dragon name is only ever one word" << endl;
+		}
+		else
+		{
+			break;
+		}
+	}
 
-	cout << "Enter Dragon rider name >> ";
-	is >> rider;
+	while (true)
+	{
+		cout << "Enter Dragon rider name >> ";
+		getline(cin, rider);
+		if (string::npos != rider.find(' '))
+		{
+			cout << "Dragon rider name is only ever one word" << endl;
+		}
+		else
+		{
+			break;
+		}
+	}
 
-	cout << "Enter Dragon colour >> ";
-	is >> colour;
+	while (true)
+	{
+		cout << "Enter Dragon colour >> ";
+		getline(cin, colour);
+		if (string::npos != colour.find(' '))
+		{
+			cout << "Dragon colour is only ever one word" << endl;
+		}
+		else
+		{
+			break;
+		}
+	}
 
 	cout << "Enter wingspan >> ";
 	is >> wingspan;
@@ -61,7 +94,7 @@ istream & Dragon::operator>>(std::istream &is)
 		cout << "Bad entry. Enter wingspan >> ";
 		is >> wingspan;
 	}
-
+	is.ignore(numeric_limits<streamsize>::max(), '\n');
 	setInitialPos();
 
 	return is;
