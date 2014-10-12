@@ -249,8 +249,6 @@ void  threadNewPos(PernThread*& pt)
 bool flameThread(const Dragon & d, const PernThread * pt)
 {
 	//TODO
-	if (nullptr == pt)
-		return false;
 
 	if (distance(d, pt) <= 100)
 		return true;
