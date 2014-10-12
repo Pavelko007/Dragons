@@ -246,19 +246,19 @@ void action(Dragon * dragons, int currentDragonNumbers, PernThread *& ptPtr)
 	cin >> direction;
 	if (direction == "left")
 	{
-		dragonNewXPos(dragons[index], false);
+		dragons[index].setNewPosX(dragonNewXPos(dragons[index], false));
 	}
 	else if (direction == "right")
 	{
-		dragonNewXPos(dragons[index], true);
+		dragons[index].setNewPosX(dragonNewXPos(dragons[index], true));
 	}
 	else if (direction == "up")
 	{
-		dragonNewYPos(dragons[index], true);
+		dragons[index].setNewPosY(dragonNewYPos(dragons[index], true));
 	}
 	else if (direction == "down")
 	{
-		dragonNewYPos(dragons[index], false);
+		dragons[index].setNewPosY(dragonNewYPos(dragons[index], false));
 	}
 	else
 	{
