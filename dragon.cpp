@@ -68,6 +68,11 @@ string Dragon::getDragonName() const
 	return name;
 }
 
+string Dragon::getRiderName()const
+{
+	return rider;
+}
+
 ostream& operator << (ostream& os, const Dragon dragon)
 {
 	//TODO

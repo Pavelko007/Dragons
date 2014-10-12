@@ -31,6 +31,7 @@ public:
 	//TODO
 	Dragon();	
 	string getDragonName() const;
+	string getRiderName()const;
 
 	ifstream& operator>>(ifstream& ifs);
 	istream & operator>>(std::istream &is);
