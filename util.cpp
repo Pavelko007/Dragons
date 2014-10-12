@@ -58,12 +58,12 @@
 
 int dragonNewXPos( const Dragon& d, bool direction )
 {
-    int newX = 0;
+	int newX = 0;
 
 	//TODO
 
 
-    return newX;
+	return newX;
 }
 
 /* This function calculates the new Y pos for a Dragon
@@ -120,11 +120,11 @@ int dragonNewXPos( const Dragon& d, bool direction )
  */
 int dragonNewYPos( const Dragon & d, bool direction )
 {
-    int newY = 0;
+	int newY = 0;
 
 	//TODO
 
-    return newY;
+	return newY;
 }
 
 // Thread always moves 200 units, but it can be down, left or right
@@ -135,59 +135,61 @@ int dragonNewYPos( const Dragon & d, bool direction )
  */
 void  threadNewPos( PernThread*& pt )
 {
-    int dir = rand( ) % 15;
-    int newPos = 0;
-    switch( dir )
-    {
-         case 0 : // down
-         case 1 :
-         case 4 : 
-         case 8 :
-         case 11 :
-         case 12 :
-         case 14:
-              newPos = pt->getCurrentYPos( ) - 200;
-              if( newPos < 0 )
-              {
-                   newPos = 0;
-              }
-              pt->setNewYPos( newPos );
+	int dir = rand( ) % 15;
+	int newPos = 0;
+	switch( dir )
+	{
+		 case 0 : // down
+		 case 1 :
+		 case 4 : 
+		 case 8 :
+		 case 11 :
+		 case 12 :
+		 case 14:
+			  newPos = pt->getCurrentYPos( ) - 200;
+			  if( newPos < 0 )
+			  {
+				   newPos = 0;
+			  }
+			  pt->setNewYPos( newPos );
 
-           break;
+		   break;
 
-         case 2 : // left
-         case 5 :
-         case 9 :
-         case 13 :
-              newPos = pt->getCurrentXPos( ) - 200;
-              if( newPos < MIN_THREAD_XPOS )
-              {
-                   newPos = MIN_THREAD_XPOS;
-              }
-              pt->setNewXPos( newPos );
+		 case 2 : // left
+		 case 5 :
+		 case 9 :
+		 case 13 :
+			  newPos = pt->getCurrentXPos( ) - 200;
+			  if( newPos < MIN_THREAD_XPOS )
+			  {
+				   newPos = MIN_THREAD_XPOS;
+			  }
+			  pt->setNewXPos( newPos );
 
-           break;
+		   break;
 
-         case 3 : // right
-         case 6 :
-         case 7 :
-         case 10 :
-              newPos = pt->getCurrentXPos( ) + 200;
-              if( newPos > MAX_THREAD_XPOS )
-              {
-                   newPos = MAX_THREAD_XPOS;
-              }
-              pt->setNewXPos( newPos );
+		 case 3 : // right
+		 case 6 :
+		 case 7 :
+		 case 10 :
+			  newPos = pt->getCurrentXPos( ) + 200;
+			  if( newPos > MAX_THREAD_XPOS )
+			  {
+				   newPos = MAX_THREAD_XPOS;
+			  }
+			  pt->setNewXPos( newPos );
 
-           break;
+		   break;
 
-         default:
+		 default:
 
-             cout << "\nSerious system error!! " <<
-                  "\nInvalid Thread direction generated" << endl;
-            break;
-    }
+			 cout << "\nSerious system error!! " <<
+				  "\nInvalid Thread direction generated" << endl;
+			break;
+	}
 }
+
+
 
 /* 
  * Thread is destroyed if a Dragon is within 100 units of Thread
@@ -210,11 +212,14 @@ void  threadNewPos( PernThread*& pt )
  */
 bool flameThread( const Dragon & d, const PernThread * pt )
 {
-    bool result = false;
-
 	//TODO
+	if (nullptr == pt)
+		return false;
 
-    return result;
+	if (distance(d, pt) <= 100)
+		return true;
+	else
+		return false;
 }
 
 /* *************************************************************
@@ -231,10 +236,10 @@ bool flameThread( const Dragon & d, const PernThread * pt )
  */
 int initialDragonXPos( )
 {
-    int pos = rand( ) % (MAX_DRAGON_XPOS * 2);
-    pos = pos + MIN_DRAGON_XPOS;
+	int pos = rand( ) % (MAX_DRAGON_XPOS * 2);
+	pos = pos + MIN_DRAGON_XPOS;
 
-    return pos;
+	return pos;
 }
 
 /*
@@ -245,10 +250,10 @@ int initialDragonXPos( )
  */
 int initialDragonYPos( )
 {
-    int pos = rand( ) % ( MAX_DRAGON_YPOS - MIN_DRAGON_YPOS );
-    pos += MIN_DRAGON_YPOS;
+	int pos = rand( ) % ( MAX_DRAGON_YPOS - MIN_DRAGON_YPOS );
+	pos += MIN_DRAGON_YPOS;
 
-    return pos;
+	return pos;
 }
 
 /*
@@ -259,10 +264,10 @@ int initialDragonYPos( )
  */
 int initialThreadXPos( )
 {
-    int pos = rand( ) % (MAX_THREAD_XPOS * 2);
-    pos = pos + MIN_THREAD_XPOS;
+	int pos = rand( ) % (MAX_THREAD_XPOS * 2);
+	pos = pos + MIN_THREAD_XPOS;
 
-    return pos;
+	return pos;
 }
 
 /*
@@ -273,10 +278,10 @@ int initialThreadXPos( )
  */
 int initialThreadYPos( )
 {
-    int pos = rand( ) % ( MAX_THREAD_YPOS - MIN_THREAD_YPOS );
-    pos += MIN_THREAD_YPOS;
+	int pos = rand( ) % ( MAX_THREAD_YPOS - MIN_THREAD_YPOS );
+	pos += MIN_THREAD_YPOS;
 
-    return pos;
+	return pos;
 }
 
 /*
@@ -290,4 +295,11 @@ void initialize( )
 {
    // seed the random generator just once
 	srand((unsigned int)time(NULL));
+}
+
+int distance(const Dragon &d, const PernThread * pt)
+{
+	double xDistance = d.getCurrentXPos() - pt->getCurrentXPos();
+	double yDistance = d.getCurrentYPos() - pt->getCurrentYPos();
+	return (int)sqrt(pow(xDistance, 2) + pow(yDistance, 2));
 }

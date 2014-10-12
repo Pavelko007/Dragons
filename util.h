@@ -38,6 +38,7 @@ int dragonNewXPos( const Dragon & d, bool direction );
 int dragonNewYPos( const Dragon & d, bool direction );
 void threadNewPos( PernThread*& pt );
 bool flameThread( const Dragon& d, const PernThread * ptPtr );
+int distance(const Dragon &d, const PernThread * pt);
 
 int initialDragonXPos( );
 int initialDragonYPos( );
@@ -45,5 +46,4 @@ int initialThreadXPos( );
 int initialThreadYPos( );
 
 void initialize( );
-
 #endif
