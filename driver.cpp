@@ -191,7 +191,7 @@ int selectDragon(const Dragon * dragons, int currentDragonNumbers)
 void deleteThread(PernThread *& ptPtr)
 {
 	delete ptPtr;
-	ptPtr = nullptr;	
+	ptPtr = nullptr;
 }
 
 /*
@@ -280,9 +280,9 @@ void action(Dragon * dragons, int currentDragonNumbers, PernThread *& ptPtr)
 		if (ptPtr->getCurrentYPos() == 0)
 		{
 			deleteThread(ptPtr);
+			cout << "Try harder next time riders!!!" << endl
+				<< "You must not let Thread reach the ground!" << endl;
 		}
-		cout << "Try harder next time riders!!!" << endl
-			<< "You must not let Thread reach the ground!" << endl;
 
 	}
 
