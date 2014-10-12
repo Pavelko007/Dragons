@@ -2,9 +2,9 @@
  * File Name:    driver.cpp
  *
  * Author:        Your Name
- * Creation Date: Wednesday, August 27 2014, 19:52 
+ * Creation Date: Wednesday, August 27 2014, 19:52
  * Last Modified: Thursday, September 04 2014, 19:00
- * 
+ *
  * File Description:
  *
  */
@@ -14,15 +14,15 @@
  * This the main function. It is fully implemented
  *
  */
-int main( )
+int main()
 {
-	initialize( );
+	initialize();
 
-	Dragon dragons[ NUMBER_OF_DRAGONS ];
+	Dragon dragons[NUMBER_OF_DRAGONS];
 
-	int currDragonNumbers = loadFile( dragons );
+	int currDragonNumbers = loadFile(dragons);
 
-	run( dragons, currDragonNumbers );
+	run(dragons, currDragonNumbers);
 
 	cout << "That's all folks" << endl;
 }
@@ -45,15 +45,15 @@ int main( )
  *       a string object to a cstring (array of char)
  *
  */
-int loadFile( Dragon * dragons )
+int loadFile(Dragon * dragons)
 {
 	int index = 0;
-	
+
 	//TODO
 	cout << "Enter filename >> ";
 	string filename;
 	cin >> filename;
-	ifstream inputFile(filename.c_str(), ifstream::binary);	 
+	ifstream inputFile(filename.c_str(), ifstream::binary);
 
 	if (inputFile.fail())
 	{
@@ -75,17 +75,17 @@ int loadFile( Dragon * dragons )
  * This function is fully implemented
  *
  */
-void run( Dragon * dragons, int & currentDragonNumbers )
+void run(Dragon * dragons, int & currentDragonNumbers)
 {
 	int choice = -1;
 	PernThread * pernPtr = nullptr;
-	while( choice != QUIT )
+	while (choice != QUIT)
 	{
-		 displayMainMenu( );
-		 cout << "Enter choice >> ";
-		 cin >> choice;
-		 cin.ignore( 10000, '\n' );
-		 process( dragons, currentDragonNumbers, choice , pernPtr); 
+		displayMainMenu();
+		cout << "Enter choice >> ";
+		cin >> choice;
+		cin.ignore(10000, '\n');
+		process(dragons, currentDragonNumbers, choice, pernPtr);
 	}
 }
 
@@ -93,7 +93,7 @@ void run( Dragon * dragons, int & currentDragonNumbers )
  * This function is fully implemented
  *
  */
-void displayMainMenu( )
+void displayMainMenu()
 {
 	cout << "\nDragon Menu " << endl;
 	cout << ADD << ". Add Dragon" << endl;
@@ -110,33 +110,33 @@ void displayMainMenu( )
  * do something
  *
  */
-void process( Dragon * dragons, int & currentDragonNumbers, int choice,
-			  PernThread *& pernPtr )
+void process(Dragon * dragons, int & currentDragonNumbers, int choice,
+	PernThread *& pernPtr)
 {
-	switch( choice )
+	switch (choice)
 	{
-		 case ADD :
-			  addDragon( dragons, currentDragonNumbers );
-			break;
+	case ADD:
+		addDragon(dragons, currentDragonNumbers);
+		break;
 
-		 case DETECT :
-			   makeThread( pernPtr );
-			break;
-		 case SELECT_ACTION : 
-			  action( dragons, currentDragonNumbers, pernPtr );
-			break;
+	case DETECT:
+		makeThread(pernPtr);
+		break;
+	case SELECT_ACTION:
+		action(dragons, currentDragonNumbers, pernPtr);
+		break;
 
-		 case DISPLAY :
-			  showAll( dragons, currentDragonNumbers, pernPtr );
-			break;
+	case DISPLAY:
+		showAll(dragons, currentDragonNumbers, pernPtr);
+		break;
 
-		 case QUIT : 
-			  // just trap this choice so that it does not show as an error
-			break;
+	case QUIT:
+		// just trap this choice so that it does not show as an error
+		break;
 
-		 default:
-			cout << choice << " is not a valid option" << endl;
-			break;
+	default:
+		cout << choice << " is not a valid option" << endl;
+		break;
 	}
 }
 
@@ -148,7 +148,7 @@ void process( Dragon * dragons, int & currentDragonNumbers, int choice,
  * should be printed to the screen and function just returns
  *
  */
-void addDragon( Dragon * dragons, int & currentDragonNumbers )
+void addDragon(Dragon * dragons, int & currentDragonNumbers)
 {
 	if (currentDragonNumbers == NUMBER_OF_DRAGONS)
 	{
@@ -169,10 +169,10 @@ void addDragon( Dragon * dragons, int & currentDragonNumbers )
  * If the Dragon with that name is not found then -1 is returned
  *
  */
-int selectDragon( const Dragon * dragons, int currentDragonNumbers )
-{	
+int selectDragon(const Dragon * dragons, int currentDragonNumbers)
+{
 	int index = -1;
-	
+
 	//TODO
 	string dragonName;
 	cout << "Enter Dragon Name >> ";
@@ -185,7 +185,13 @@ int selectDragon( const Dragon * dragons, int currentDragonNumbers )
 		}
 	}
 
-	return index; 
+	return index;
+}
+
+void deleteThread(PernThread *& ptPtr)
+{
+	delete ptPtr;
+	ptPtr = nullptr;	
 }
 
 /*
@@ -200,7 +206,7 @@ int selectDragon( const Dragon * dragons, int currentDragonNumbers )
  *
  *  left, right, up or down
  *
- *  The position of the selected Dragon is updated, using the 
+ *  The position of the selected Dragon is updated, using the
  *  appropriate function in the util.cpp file and the set function in the
  *  Dragon class.
  *
@@ -226,13 +232,61 @@ int selectDragon( const Dragon * dragons, int currentDragonNumbers )
  *  ptPtr ot nullptr.
  *
  */
-void action( Dragon * dragons, int currentDragonNumbers, PernThread *& ptPtr )
+void action(Dragon * dragons, int currentDragonNumbers, PernThread *& ptPtr)
 {
-	 cout << "First select a Dragon" << endl;
-	 int index = selectDragon( dragons, currentDragonNumbers );
+	cout << "First select a Dragon" << endl;
+	int index = selectDragon(dragons, currentDragonNumbers);
+	if (-1 == index)
+	{
+		return;
+	}
+	cout << "Enter direction (left, right, up, down) >> ";
+	string direction;
 
-	 
-	 //TODO
+	cin >> direction;
+	if (direction == "left")
+	{
+		dragonNewXPos(dragons[index], false);
+	}
+	else if (direction == "right")
+	{
+		dragonNewXPos(dragons[index], true);
+	}
+	else if (direction == "up")
+	{
+		dragonNewYPos(dragons[index], true);
+	}
+	else if (direction == "down")
+	{
+		dragonNewYPos(dragons[index], false);
+	}
+	else
+	{
+
+	}
+
+	if (flameThread(dragons[index], ptPtr))
+	{
+		deleteThread(ptPtr);
+
+		cout << "Congratulations Rider " << dragons[index].getRiderName()
+			<< " and Dragon " << dragons[index].getDragonName() << "!!!!!"
+			<< "You have successfully destroyed this Thread" << endl
+			<< "More thread is on the way, stay alert!!" << endl;
+	}
+	else
+	{
+		threadNewPos(ptPtr);
+		if (ptPtr->getCurrentYPos() == 0)
+		{
+			deleteThread(ptPtr);
+		}
+		cout << "Try harder next time riders!!!" << endl
+			<< "You must not let Thread reach the ground!" << endl;
+
+	}
+
+	//TODO
 }
 
 /*
@@ -244,9 +298,9 @@ void action( Dragon * dragons, int currentDragonNumbers, PernThread *& ptPtr )
  * array, BUT ONLY THE NON-DEFAULT Dragons
  *
  */
-void showAll( const Dragon * dragons, int currentDragonNumbers, 
-			  const PernThread * ptPtr )
-{    
+void showAll(const Dragon * dragons, int currentDragonNumbers,
+	const PernThread * ptPtr)
+{
 	//TODO
 	cout << endl;
 	if (nullptr == ptPtr)
@@ -262,7 +316,7 @@ void showAll( const Dragon * dragons, int currentDragonNumbers,
 	for (int i = 0; i < currentDragonNumbers; i++)
 	{
 		cout << dragons[i];
-	}	 
+	}
 }
 
 /*
@@ -276,7 +330,7 @@ void showAll( const Dragon * dragons, int currentDragonNumbers,
  * either hits the ground or is destroyed by a Dragon
  *
  */
-void makeThread( PernThread *& ptPtr )
+void makeThread(PernThread *& ptPtr)
 {
-	ptPtr = PernThread::getThread( );
+	ptPtr = PernThread::getThread();
 }
