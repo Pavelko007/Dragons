@@ -57,9 +57,9 @@ int loadFile(Dragon * dragons)
 
 	if (inputFile.fail())
 	{
-		cout << "The file doesn't exist" << endl;
+		cout << "Can't open file" << endl;
 		return 0;
-	}
+	}	
 
 	while (index < NUMBER_OF_DRAGONS && inputFile.good())
 	{
