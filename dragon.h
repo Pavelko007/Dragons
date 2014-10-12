@@ -32,8 +32,11 @@ public:
 	Dragon();	
 	string getDragonName() const;
 	string getRiderName()const;
-	int getCurrentXPos()const;
-	int getCurrentYPos()const;
+	int getWingspan()const;
+	int getCurrentPosX()const;
+	int getCurrentPosY()const;
+	void setNewPosX(int newXPos);
+	void setNewPosY(int newPosY);
 
 	ifstream& operator>>(ifstream& ifs);
 	istream & operator>>(std::istream &is);

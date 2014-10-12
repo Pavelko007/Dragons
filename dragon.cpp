@@ -73,14 +73,29 @@ string Dragon::getRiderName()const
 	return rider;
 }
 
-int Dragon::getCurrentXPos() const
+int Dragon::getCurrentPosX() const
 {
 	return posX;
 }
 
-int Dragon::getCurrentYPos() const
+int Dragon::getCurrentPosY() const
 {
 	return posY;
+}
+
+int Dragon::getWingspan() const
+{
+	return wingspan;
+}
+
+void Dragon::setNewPosX(int newPosX)
+{
+	posX = newPosX;
+}
+
+void Dragon::setNewPosY(int newPosY)
+{
+	posY = newPosY;
 }
 
 ostream& operator << (ostream& os, const Dragon dragon)
