@@ -256,8 +256,7 @@ void action(Dragon * dragons, int currentDragonNumbers, PernThread *& ptPtr)
 	}
 
 	string direction;
-
-	cin.get();
+	
 	while (true)
 	{
 		cout << "Enter direction (left, right, up, down) >> ";
