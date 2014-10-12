@@ -2,9 +2,9 @@
  * File Name:    util.cpp
  *
  * Author:        Your Name
- * Creation Date: Wednesday, August 27 2014, 20:24 
+ * Creation Date: Wednesday, August 27 2014, 20:24
  * Last Modified: Thursday, September 04 2014, 19:05
- * 
+ *
  * File Description:
  *
  * For CSE1CPP Assignment 1 2014
@@ -22,7 +22,7 @@
  * and applies the formula, based on wingspan, to
  * calculate the new position.
  *
- * NOTE: if the new position would take the Dragon outside 
+ * NOTE: if the new position would take the Dragon outside
  *       the edges of the area, then the new figure is set
  *       to the edge, either MAX_DRAGON_XPOS or MIN_DRAGON_XPOS
  *
@@ -34,7 +34,7 @@
  *
  * We pass a Dragon object into this function. For this function to
  * work the Dragon object will need a way of getting the value of the
- * wingspan, meaning that the Dragon class will need a public 
+ * wingspan, meaning that the Dragon class will need a public
  * get function that returns the value of the wingspan.
  *
  * As well, the Dragon object needs a public get function to give
@@ -56,12 +56,29 @@
  *
  */
 
-int dragonNewXPos( const Dragon& d, bool direction )
+int dragonNewXPos(const Dragon& d, bool direction)
 {
 	int newX = 0;
 
+	int posDiff = (int)((100 / (double)d.getWingspan()) * 50);
 	//TODO
+	if (direction)
+	{
+		newX = d.getCurrentPosX() + posDiff;
+	}
+	else
+	{
+		newX = d.getCurrentPosX() - posDiff;
+	}
 
+	if (newX > MAX_DRAGON_XPOS)
+	{
+		newX = MAX_DRAGON_XPOS;
+	}
+	if (newX < MIN_DRAGON_XPOS)
+	{
+		newX = MIN_DRAGON_XPOS;
+	}
 
 	return newX;
 }
@@ -76,7 +93,7 @@ int dragonNewXPos( const Dragon& d, bool direction )
  * and applies the formula, based on wingspan, to
  * calculate the new position.
  *
- * NOTE: if the new position would take the Dragon outside 
+ * NOTE: if the new position would take the Dragon outside
  *       the edges of the area, then the new figure is set
  *       to the edge, either MAX_DRAGON_YPOS or 0, as Dragons
  *       cannot operate effectively above MAX_DRAGON_YPOS
@@ -114,17 +131,36 @@ int dragonNewXPos( const Dragon& d, bool direction )
  * class needs a set method to update its Y position.
  *
  * Unlike the function above for the X position everything in the
- * formula is fine as ints (no division) so there is no need for any 
+ * formula is fine as ints (no division) so there is no need for any
  * casting.
  *
  */
-int dragonNewYPos( const Dragon & d, bool direction )
+int dragonNewYPos(const Dragon & d, bool direction)
 {
 	int newY = 0;
 
 	//TODO
+	int posDiff = d.getWingspan() * 5;
 
-	return newY;
+	if (direction)
+	{
+		newY = d.getCurrentPosY() + posDiff;
+	}
+	else
+	{
+		newY = d.getCurrentPosY() - posDiff;
+	}
+
+	if (newY > MAX_DRAGON_YPOS)
+	{
+		newY = MAX_DRAGON_YPOS;
+	}
+	if (newY < 0)
+	{
+		newY = 0;
+	}
+
+	return newY;	 
 }
 
 // Thread always moves 200 units, but it can be down, left or right
@@ -133,65 +169,65 @@ int dragonNewYPos( const Dragon & d, bool direction )
  * This function is fully implemented
  *
  */
-void  threadNewPos( PernThread*& pt )
+void  threadNewPos(PernThread*& pt)
 {
-	int dir = rand( ) % 15;
+	int dir = rand() % 15;
 	int newPos = 0;
-	switch( dir )
+	switch (dir)
 	{
-		 case 0 : // down
-		 case 1 :
-		 case 4 : 
-		 case 8 :
-		 case 11 :
-		 case 12 :
-		 case 14:
-			  newPos = pt->getCurrentYPos( ) - 200;
-			  if( newPos < 0 )
-			  {
-				   newPos = 0;
-			  }
-			  pt->setNewYPos( newPos );
+	case 0: // down
+	case 1:
+	case 4:
+	case 8:
+	case 11:
+	case 12:
+	case 14:
+		newPos = pt->getCurrentYPos() - 200;
+		if (newPos < 0)
+		{
+			newPos = 0;
+		}
+		pt->setNewYPos(newPos);
 
-		   break;
+		break;
 
-		 case 2 : // left
-		 case 5 :
-		 case 9 :
-		 case 13 :
-			  newPos = pt->getCurrentXPos( ) - 200;
-			  if( newPos < MIN_THREAD_XPOS )
-			  {
-				   newPos = MIN_THREAD_XPOS;
-			  }
-			  pt->setNewXPos( newPos );
+	case 2: // left
+	case 5:
+	case 9:
+	case 13:
+		newPos = pt->getCurrentXPos() - 200;
+		if (newPos < MIN_THREAD_XPOS)
+		{
+			newPos = MIN_THREAD_XPOS;
+		}
+		pt->setNewXPos(newPos);
 
-		   break;
+		break;
 
-		 case 3 : // right
-		 case 6 :
-		 case 7 :
-		 case 10 :
-			  newPos = pt->getCurrentXPos( ) + 200;
-			  if( newPos > MAX_THREAD_XPOS )
-			  {
-				   newPos = MAX_THREAD_XPOS;
-			  }
-			  pt->setNewXPos( newPos );
+	case 3: // right
+	case 6:
+	case 7:
+	case 10:
+		newPos = pt->getCurrentXPos() + 200;
+		if (newPos > MAX_THREAD_XPOS)
+		{
+			newPos = MAX_THREAD_XPOS;
+		}
+		pt->setNewXPos(newPos);
 
-		   break;
+		break;
 
-		 default:
+	default:
 
-			 cout << "\nSerious system error!! " <<
-				  "\nInvalid Thread direction generated" << endl;
-			break;
+		cout << "\nSerious system error!! " <<
+			"\nInvalid Thread direction generated" << endl;
+		break;
 	}
 }
 
 
 
-/* 
+/*
  * Thread is destroyed if a Dragon is within 100 units of Thread
  *
  * The formula for calculating the distance is
@@ -210,7 +246,7 @@ void  threadNewPos( PernThread*& pt )
  * the value of its X and Y position
  *
  */
-bool flameThread( const Dragon & d, const PernThread * pt )
+bool flameThread(const Dragon & d, const PernThread * pt)
 {
 	//TODO
 	if (nullptr == pt)
@@ -229,77 +265,77 @@ bool flameThread( const Dragon & d, const PernThread * pt )
  */
 
 /*
- * This function is called when we create a Dragon object with 
+ * This function is called when we create a Dragon object with
  * keyboard input, to generate the initial X position, which is
  * then set in the Dragon object
  *
  */
-int initialDragonXPos( )
+int initialDragonXPos()
 {
-	int pos = rand( ) % (MAX_DRAGON_XPOS * 2);
+	int pos = rand() % (MAX_DRAGON_XPOS * 2);
 	pos = pos + MIN_DRAGON_XPOS;
 
 	return pos;
 }
 
 /*
- * This function is called when we create a Dragon object with 
+ * This function is called when we create a Dragon object with
  * keyboard input, to generate the initial Y position, which is
  * then set in the Dragon object
  *
  */
-int initialDragonYPos( )
+int initialDragonYPos()
 {
-	int pos = rand( ) % ( MAX_DRAGON_YPOS - MIN_DRAGON_YPOS );
+	int pos = rand() % (MAX_DRAGON_YPOS - MIN_DRAGON_YPOS);
 	pos += MIN_DRAGON_YPOS;
 
 	return pos;
 }
 
 /*
- * This function is called when we create a PernThread object 
- * to generate the initial X position, which is then set in the 
+ * This function is called when we create a PernThread object
+ * to generate the initial X position, which is then set in the
  * PernThread object
  *
  */
-int initialThreadXPos( )
+int initialThreadXPos()
 {
-	int pos = rand( ) % (MAX_THREAD_XPOS * 2);
+	int pos = rand() % (MAX_THREAD_XPOS * 2);
 	pos = pos + MIN_THREAD_XPOS;
 
 	return pos;
 }
 
 /*
- * This function is called when we create a PernThread object 
- * to generate the initial Y position, which is then set in the 
+ * This function is called when we create a PernThread object
+ * to generate the initial Y position, which is then set in the
  * PernThread object
  *
  */
-int initialThreadYPos( )
+int initialThreadYPos()
 {
-	int pos = rand( ) % ( MAX_THREAD_YPOS - MIN_THREAD_YPOS );
+	int pos = rand() % (MAX_THREAD_YPOS - MIN_THREAD_YPOS);
 	pos += MIN_THREAD_YPOS;
 
 	return pos;
 }
 
 /*
- * This function is called from main( ) in the driver program to 
+ * This function is called from main( ) in the driver program to
  * initialize the random number generator
  *
  * Only call this function once (alredy done for you)
  *
  */
-void initialize( )
+void initialize()
 {
-   // seed the random generator just once
+	// seed the random generator just once
 	srand((unsigned int)time(NULL));
 }
 
 int distance(const Dragon &d, const PernThread * pt)
 {
-	double xDistance = d.getCurrentXPos() - pt->getCurrentXPos();
-	double yDistance = d.getCurrentYPos() - pt->getCurrentYPos();
+	double xDistance = d.getCurrentPosX() - pt->getCurrentXPos();
+	double yDistance = d.getCurrentPosX() - pt->getCurrentYPos();
 	return (int)sqrt(pow(xDistance, 2) + pow(yDistance, 2));
 }
