@@ -238,37 +238,48 @@ void action(Dragon * dragons, int currentDragonNumbers, PernThread *& ptPtr)
 	int index = selectDragon(dragons, currentDragonNumbers);
 	if (-1 == index)
 	{
+		cout << "Dragon isn't exist" << endl;
 		return;
 	}
-	cout << "Enter direction (left, right, up, down) >> ";
+	
 	string direction;
+	
+	cin.get();
+	while (true)
+	{
+		cout << "Enter direction (left, right, up, down) >> ";
+		getline(cin, direction);
+		if (direction == "left")
+		{
+			dragons[index].setNewPosX(dragonNewXPos(dragons[index], false));
+		}
+		else if (direction == "right")
+		{
+			dragons[index].setNewPosX(dragonNewXPos(dragons[index], true));
+		}
+		else if (direction == "up")
+		{
+			dragons[index].setNewPosY(dragonNewYPos(dragons[index], true));
+		}
+		else if (direction == "down")
+		{
+			dragons[index].setNewPosY(dragonNewYPos(dragons[index], false));
+		}
+		else
+		{
+			cout << "Invalid input" << endl;
+			continue;
+		}
 
-	cin >> direction;
-	if (direction == "left")
-	{
-		dragons[index].setNewPosX(dragonNewXPos(dragons[index], false));
+		break;
 	}
-	else if (direction == "right")
-	{
-		dragons[index].setNewPosX(dragonNewXPos(dragons[index], true));
-	}
-	else if (direction == "up")
-	{
-		dragons[index].setNewPosY(dragonNewYPos(dragons[index], true));
-	}
-	else if (direction == "down")
-	{
-		dragons[index].setNewPosY(dragonNewYPos(dragons[index], false));
-	}
-	else
-	{
 
-	}
+	if (nullptr == ptPtr)
+		return;
 
 	if (flameThread(dragons[index], ptPtr))
 	{
 		deleteThread(ptPtr);
-
 		cout << "Congratulations Rider " << dragons[index].getRiderName()
 			<< " and Dragon " << dragons[index].getDragonName() << "!!!!!"
 			<< "You have successfully destroyed this Thread" << endl
