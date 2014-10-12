@@ -52,7 +52,7 @@ int loadFile(Dragon * dragons)
 	//TODO
 	cout << "Enter filename >> ";
 	string filename;
-	cin >> filename;
+	getline(cin, filename);
 	ifstream inputFile(filename.c_str(), ifstream::binary);
 
 	if (inputFile.fail())
