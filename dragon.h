@@ -32,6 +32,8 @@ public:
 	Dragon();	
 	string getDragonName() const;
 	string getRiderName()const;
+	int getCurrentXPos()const;
+	int getCurrentYPos()const;
 
 	ifstream& operator>>(ifstream& ifs);
 	istream & operator>>(std::istream &is);
