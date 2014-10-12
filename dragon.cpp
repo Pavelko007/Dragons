@@ -45,12 +45,22 @@ istream & Dragon::operator>>(std::istream &is)
 	//TODO
 	cout << "Enter Dragon name >> ";
 	is >> name;
+
 	cout << "Enter Dragon rider name >> ";
 	is >> rider;
+
 	cout << "Enter Dragon colour >> ";
 	is >> colour;
+
 	cout << "Enter wingspan >> ";
 	is >> wingspan;
+
+	while (is.fail() || wingspan < 0){
+		is.clear();
+		is.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Bad entry. Enter wingspan >> ";
+		is >> wingspan;
+	}
 
 	setInitialPos();
 

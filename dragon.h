@@ -20,9 +20,13 @@ using std::cin;
 using std::endl;
 using std::ostream;
 using std::istream;
+using std::streamsize;
 
 #include <fstream>
 using std::ifstream;
+
+#include <limits>
+using std::numeric_limits;
 
 class Dragon
 {
