@@ -59,7 +59,7 @@ int loadFile(Dragon * dragons)
 	{
 		cout << "Can't open file" << endl;
 		return 0;
-	}	
+	}
 
 	while (index < NUMBER_OF_DRAGONS && inputFile.good())
 	{
@@ -174,9 +174,22 @@ int selectDragon(const Dragon * dragons, int currentDragonNumbers)
 	int index = -1;
 
 	//TODO
-	string dragonName;
-	cout << "Enter Dragon Name >> ";
-	cin >> dragonName;
+	string dragonName; 
+
+	while (true)
+	{
+		cout << "Enter Dragon Name >> ";
+		getline(cin, dragonName);
+		if (string::npos != dragonName.find(' '))
+		{
+			cout << "Dragon name is only ever one word " << endl;
+		}
+		else
+		{
+			break;
+		}
+	}
+
 	for (int i = 0; i < currentDragonNumbers; i++)
 	{
 		if (dragons[i].getDragonName() == dragonName)
@@ -241,9 +254,9 @@ void action(Dragon * dragons, int currentDragonNumbers, PernThread *& ptPtr)
 		cout << "Dragon isn't exist" << endl;
 		return;
 	}
-	
+
 	string direction;
-	
+
 	cin.get();
 	while (true)
 	{
